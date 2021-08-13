@@ -1,7 +1,4 @@
 import admin, { ServiceAccount } from "firebase-admin";
-import { config } from "dotenv";
-
-config();
 
 const serviceAccount: ServiceAccount = JSON.parse(
 	Buffer.from(process.env.GCLOUD_CREDENTIALS, "base64").toString("utf-8")
