@@ -1,0 +1,33 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "airbnb-typescript",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "semi": "error",
+        "no-console": "off",
+        "no-async-promise-executor": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "no-underscore-dangle": "off",
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/parser": "off",
+        "linebreak-style": "off",
+        "import/prefer-default-export": "off",
+        "no-var": "off"
+    }
+}
