@@ -16,12 +16,14 @@
     "mongoose": "^5.13.7",
     "next": "10.x",
     "react": "17.x",
-    "react-dom": "17.x"
+    "react-dom": "17.x",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.1",
     "@types/express": "^4.17.13",
     "@types/react": "^17.0.14",
+    "@types/yup": "^0.29.13",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
     "eslint": "^7.32.0",
