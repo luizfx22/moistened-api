@@ -1,0 +1,7 @@
+micropython-pkg-resources
+micropython-uasyncio
+picoweb
+pycopy-ulogging
+urequests
+utemplate
+uwebsockets
