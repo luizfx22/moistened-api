@@ -1,16 +1,16 @@
-import Grupo from "./Grupo";
+import Grupo from './Grupo';
 
 type Sensor = {
-    id: number;
-    gid: number;
-    mac: string;
+  id: number;
+  grupo_id: number;
+  mac: string;
 
-    // Datas (auditoria)
-    created_at: Date;
-    bounded_at: Date;
-    bounded_by: number;
+  // Datas (auditoria)
+  created_at: Date;
+  bounded_at: Date;
+  bounded_by: number;
 
-    grupo?: Grupo;
-} 
+  grupo?: Grupo;
+};
 
 export default Sensor;

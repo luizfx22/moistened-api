@@ -1,12 +1,12 @@
-import Grupo from "./Grupo";
+import Grupo from './Grupo';
 
 type ContasGrupo = {
-    id: number;
-    uid: string;
-    gid: number;
+  id: number;
+  usuario_id: string;
+  grupo_id: number;
 
-    // Para fins de include
-    grupo?: Grupo;
-}
+  // Para fins de include
+  grupo?: Grupo;
+};
 
 export default ContasGrupo;

@@ -1,14 +1,14 @@
-import Sensor from "./Sensor";
+import Sensor from './Sensor';
 
 type Dado = {
-    id: number;
-    sid: number;
-    air_temperature: number;
-    air_humidity: number;
-    soil_humidity: number;
-    readed_at: Date;
+  id: number;
+  sensor_id: number;
+  air_temperature: number;
+  air_humidity: number;
+  soil_humidity: number;
+  readed_at: Date;
 
-    sensor?: Sensor;
-}
+  sensor?: Sensor;
+};
 
 export default Dado;
