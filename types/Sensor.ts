@@ -3,7 +3,8 @@ import Grupo from './Grupo';
 type Sensor = {
   id: number;
   grupo_id: number;
-  mac: string;
+  sensor_mac: string;
+  codigo_vinculacao: number;
 
   // Datas (auditoria)
   created_at: Date;
