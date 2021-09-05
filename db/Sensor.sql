@@ -8,6 +8,7 @@ create table "Sensor"
 			references "Grupos"
 				on delete cascade,
 	sensor_mac varchar not null,
+	codigo_vinculacao int,
 	created_at timestamp default NOW(),
 	bounded_at timestamp,
 	bounded_by uuid
