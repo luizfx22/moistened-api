@@ -84,6 +84,25 @@ else:
 
     @app.route("/")
     def index(req, resp):
+        print(req.method)
+        if req.method == 'POST':
+            yield from req.read_form_data()
+
+            form = req.form
+
+            with open("./settings.json", 'w', encoding="UTF-8") as _file:  # Lê o JSON
+                json.dump({
+                    "ap-ssid": form["ap-ssid"],
+                    "ap-password": form["ap-password"],
+                    "esp-hookup-code": esp_hookup_code
+                }, _file)
+                _file.close()
+
+            yield from picoweb.start_response(resp)
+            yield from resp.awrite(json.dumps({"success": True, "hookup-code": esp_hookup_code}))
+            yield from resp.awrite("/?success=true")
+            return 2
+
         app._load_template("index.html")
 
         available_networks = []
@@ -98,26 +117,6 @@ else:
 
         yield from picoweb.start_response(resp, content_type="text/html")
         yield from app.render_template(resp, "index.html", (template_args,))
-
-    @app.route("/")
-    def net_setup(req, resp):
-        if req.method == 'POST':
-            size = int(req.headers[b"Content-Length"])
-            qs = yield from req.reader.readexactly(size)
-            req.qs = qs.decode()
-            req.parse_qs()
-
-            form = req.form
-
-            with open("./settings.json", 'w', encoding="UTF-8") as file:  # Lê o JSON
-                json.dump({
-                    "ap-ssid": form["ap-ssid"],
-                    "ap-password": form["ap-password"],
-                    "esp-hookup-code": esp_hookup_code
-                }, file)
-                file.close()
-
-            yield from picoweb.start_response(resp)
-            yield from resp.awrite(json.dumps({"success": True}))
+        return 1
 
     app.run(debug=True, host="192.168.4.1", port=80)

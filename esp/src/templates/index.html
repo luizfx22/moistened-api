@@ -62,4 +62,14 @@
 	</div>
 </body>
 
+<script lang="javascript">
+	const urlSearchParams = new URLSearchParams(window.location.search);
+	const params = Object.fromEntries(urlSearchParams.entries());
+
+	if (params?.success) {
+		alert("Dados gravados com sucesso!")
+		alert("Agora você pode reiniciar o sensor!")
+	}
+</script>
+
 </html>

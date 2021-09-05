@@ -15,4 +15,19 @@ try:
 except Exception:
     pass
 
+try:
+    os.remove("boot.py")
+except Exception:
+    pass
+
+try:
+    os.remove("main.py")
+except Exception:
+    pass
+
+try:
+    os.remove("settings.json")
+except Exception:
+    pass
+
 print(os.listdir())
