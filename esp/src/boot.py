@@ -2,11 +2,12 @@ import re
 from time import sleep
 import os
 import hashlib
-from machine import Pin
+from machine import Pin, reset
 import network
 import ujson as json
 import picoweb
 import ubinascii
+import urequests as requests
 
 
 # Useful fuction
@@ -24,7 +25,9 @@ def blink_embeded_led(times: int, delay_ms: int = 500):
 default_settings = {
     "ap-ssid": "",
     "ap-password": "",
-    "esp-hookup-code": ""
+    "esp-hookup-code": "",
+    "dht-pin": 22,
+    "soil-pin": 32
 }
 
 # Se o arquivo JSON não existe, cria um novo
@@ -84,7 +87,6 @@ else:
 
     @app.route("/")
     def index(req, resp):
-        print(req.method)
         if req.method == 'POST':
             yield from req.read_form_data()
 
@@ -94,20 +96,20 @@ else:
                 json.dump({
                     "ap-ssid": form["ap-ssid"],
                     "ap-password": form["ap-password"],
-                    "esp-hookup-code": esp_hookup_code
+                    "esp-hookup-code": esp_hookup_code,
+                    "dht-pin": 22,
+                    "soil-pin": 32
                 }, _file)
                 _file.close()
 
-            yield from picoweb.start_response(resp)
-            yield from resp.awrite(json.dumps({"success": True, "hookup-code": esp_hookup_code}))
-            yield from resp.awrite("/?success=true")
-            return 2
+            yield from picoweb.start_response(resp, status="302", headers={"Location": '/?success=true'})
+            return reset()
 
         app._load_template("index.html")
 
         available_networks = []
-        for network in local_networks:
-            available_networks.append(network[0].decode("utf-8"))
+        for _network in local_networks:
+            available_networks.append(_network[0].decode("utf-8"))
 
         template_args = {
             "networks": available_networks,
