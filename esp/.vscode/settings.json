@@ -20,5 +20,7 @@
         ".micropy\\esp-n"
     ],
     "python.linting.pylintEnabled": true,
-    "python.languageServer": "Microsoft"
+    "python.languageServer": "Microsoft",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
 }

@@ -1,9 +1,9 @@
-create table "Sensor"
+create table "Sensores"
 (
 	id serial
 		constraint sensor_pk
 			primary key,
-	grupo_id int not null
+	grupo_id int
 		constraint sensor_grupos_id_fk
 			references "Grupos"
 				on delete cascade,

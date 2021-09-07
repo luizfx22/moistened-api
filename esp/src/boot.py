@@ -9,6 +9,9 @@ import picoweb
 import ubinascii
 import urequests as requests
 
+DEV_API_ADDR = "http://192.168.0.2:3001"
+PROD_API_ADDR = "http://api.moistened.luizg.dev"
+
 
 # Useful fuction
 def blink_embeded_led(times: int, delay_ms: int = 500):
@@ -59,6 +62,46 @@ if default_settings["ap-ssid"] != "" and default_settings["ap-password"] != "":
 
         print("Connected to", default_settings["ap-ssid"], "!")
         blink_embeded_led(10, 50)
+
+        # --------------------------------
+        # Código que consome direto na API
+        # --------------------------------
+        mac = ubinascii.hexlify(wlan.config('mac'), ':').decode()
+        res = requests.get(DEV_API_ADDR + '/api/sensor/register?mac=' +
+                           mac, headers={"Content-Type": "application/json"}).json()
+
+        headers = {"Content-Type": "application/json"}
+        api_path = "/api/sensor/register"
+
+        if not res["registered"]:
+            payload = {
+                "sensor_mac": mac,
+                "codigo_vinculacao": default_settings["esp-hookup-code"]
+            }
+
+            registro = requests.post(
+                DEV_API_ADDR + api_path, data=json.dumps(payload), headers=headers).json()
+
+            if registro["success"]:
+                with open("settings.json", "r+", encoding="utf-8") as file:
+                    data = json.load(file)
+                    data.update({"sensor-id": registro["result"]["id"]})
+                    file.seek(0)
+                    json.dump(data, file)
+                    default_settings["sensor-id"] = registro["result"]["id"]
+                    file.close()
+
+            else:
+                reset()
+        else:
+            if "sensor-id" not in default_settings.keys():
+                with open("settings.json", "r+", encoding="utf-8") as file:
+                    data = json.load(file)
+                    data.update({"sensor-id": res["id"]})
+                    file.seek(0)
+                    json.dump(data, file)
+                    default_settings["sensor-id"] = res["id"]
+                    file.close()
 
 else:
     # Se não

@@ -38,10 +38,10 @@ create unique index usuariosgrupo_usuario_id_uindex
 create table "Sensores"
 (
 	id serial
-		constraint sensores_pk
+		constraint sensor_pk
 			primary key,
-	grupo_id int not null
-		constraint sensores_grupos_id_fk
+	grupo_id int
+		constraint sensor_grupos_id_fk
 			references "Grupos"
 				on delete cascade,
 	sensor_mac varchar not null,
@@ -49,7 +49,7 @@ create table "Sensores"
 	created_at timestamp default NOW(),
 	bounded_at timestamp,
 	bounded_by uuid
-		constraint sensores_users_id_fk
+		constraint sensor_users_id_fk
 			references auth.users
 				on delete cascade
 );
