@@ -1,0 +1,22 @@
+{
+    "name": "esp-n",
+    "stubs": {
+        "esp32-micropython-1.15.0": "1.3.9"
+    },
+    "dev-packages": {
+        "micropy-cli": "*"
+    },
+    "packages": {
+        "picoweb": "*",
+        "urequests": "*",
+        "uwebsockets": "*",
+        "micropython-uasyncio": "*",
+        "micropython-pkg-resources": "*",
+        "pycopy-ulogging": "*",
+        "utemplate": "*"
+    },
+    "config": {
+        "vscode": true,
+        "pylint": true
+    }
+}

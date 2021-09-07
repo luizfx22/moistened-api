@@ -1,0 +1,75 @@
+{% args template_args %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+	<title></title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+		}
+
+		.container {
+			margin: auto;
+		}
+
+		.connection-form>div>select,
+		input {
+			width: 100%;
+		}
+
+		.done-btn {
+			float: right;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="one-third column">
+				<h4>SEU CÓDIGO É:</h4>
+				<h1 align="center">{{ template_args["esp-hookup-code"] }}</h1>
+			</div>
+			<div class="two-thirds column">
+				<section>
+					<form method="POST" action="/" class="connection-form">
+						<div>
+							<label for="ap-ssid">Rede à se conectar:</label>
+							<select name="ap-ssid" id="ap-ssid">
+								{% for network in template_args["networks"] %}
+								<option value="{{ network }}">{{ network }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div>
+							<label for="ap-password">Senha da rede:</label>
+							<input name="ap-password" id="ap-password" type="password">
+						</div>
+						<button type="submit" class="done-btn">Gravar</button>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script lang="javascript">
+	const urlSearchParams = new URLSearchParams(window.location.search);
+	const params = Object.fromEntries(urlSearchParams.entries());
+
+	if (params?.success) {
+		alert("Dados gravados com sucesso!")
+		alert("Agora você pode reiniciar o sensor!")
+	}
+</script>
+
+</html>

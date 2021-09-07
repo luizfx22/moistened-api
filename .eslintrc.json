@@ -1,33 +1,53 @@
 {
     "root": true,
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "sourceType": "module",
-        "project": "./tsconfig.json"
+    "env": {
+        "node": true,
+        "browser": true
     },
+    "parser": "@typescript-eslint/parser",
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "extends": [
-        "airbnb-typescript",
+        "airbnb",
+        "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "airbnb/hooks",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
     ],
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 6
+    },
     "rules": {
-        "semi": "error",
-        "no-console": "off",
+        "prettier/prettier": "error",
+        "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-var-requires": "off",
         "no-async-promise-executor": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "no-underscore-dangle": "off",
-        "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/ban-types": "off",
-        "@typescript-eslint/parser": "off",
-        "linebreak-style": "off",
+        "class-methods-use-this": "off",
         "import/prefer-default-export": "off",
-        "no-var": "off"
+        "camelcase": "off",
+        "prefer-promise-reject-errors": "off",
+        "no-restricted-syntax": "off",
+        "no-plusplus": "off",
+        "no-param-reassign": "off",
+        "no-await-in-loop": "off",
+        "no-control-regex": "off",
+        "no-constant-condition": "off",
+        "no-continue": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "no-underscore-dangle": "off",
+        "consistent-return": "off",
+        "no-console": "off",
+        "import/no-extraneous-dependencies": "off",
+        "global-require": "off",
+        "import/no-dynamic-require": "off",
+        "import/order": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }
