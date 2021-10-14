@@ -1,10 +1,10 @@
-create table "Dados"
+create table "Dado"
 (
 	id serial
-		constraint dados_pk
+		constraint dado_pk
 			primary key,
 	sensor_id int not null
-		constraint dados_sensor_id_fk
+		constraint dado_sensor_id_fk
 			references "Sensor",
 	air_temperature float4 not null,
 	air_humidity float4 not null,

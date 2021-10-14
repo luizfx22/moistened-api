@@ -1,73 +1,98 @@
-create table "Grupos"
+create table "Horta"
 (
-	id serial
-		constraint grupos_pk
-			primary key,
-	nome varchar default 'Grupo sem nome',
-	created_at timestamp default NOW(),
+	id uuid default gen_random_uuid(),
+	descricao text not null,
+	localizacao jsonb,
+	proprietario_id uuid not null
+		constraint horta_users_id_fk
+			references "Users",
 	created_by uuid not null
-		constraint fk_rel_cby_grupos
-			references auth.users
-				on delete cascade,
-	updated_at timestamp default NOW(),
+		constraint horta_users_id_fk_2
+			references "Users",
+	created_at timestamp default NOW() not null,
 	updated_by uuid not null
-		constraint fk_rel_uby_grupos
-			references auth.users
-				on delete cascade
+		constraint horta_users_id_fk_3
+			references "Users",
+	updated_at timestamp default NOW()
 );
 
-create table "UsuariosGrupo"
+create unique index horta_id_uindex
+	on "Horta" (id);
+
+alter table "Horta"
+	add constraint horta_pk
+		primary key (id);
+
+create table "ContasHorta"
 (
 	id serial
-		constraint usuariosgrupo_pk
+		constraint contashorta_pk
 			primary key,
 	usuario_id uuid not null
-		constraint usuariosgrupo_users_id_fk
-			references auth.users
-				on delete cascade,
-	grupo_id int not null
-		constraint usuariosgrupo_grupos_id_fk
-			references "Grupos"
-				on delete cascade,
-	created_at timestamp default NOW()
+		constraint contashorta_users_id_fk
+			references "Users" (id),
+	horta_id uuid not null
+		constraint contashorta_horta_id_fk
+			references "Horta" (id)
 );
 
-create unique index usuariosgrupo_usuario_id_uindex
-	on "UsuariosGrupo" (usuario_id);
-
-create table "Sensores"
+create table "Controlador"
 (
 	id serial
-		constraint sensor_pk
+		constraint controlador_pk
 			primary key,
-	grupo_id int
-		constraint sensor_grupos_id_fk
-			references "Grupos"
-				on delete cascade,
-	sensor_mac varchar not null,
-	codigo_vinculacao int,
+	horta_id uuid not null
+		constraint controlador_horta_id_fk
+			references "Horta",
+	localizacao jsonb,
+	created_by uuid not null
+		constraint controlador_users_id_fk
+			references "Users",
 	created_at timestamp default NOW(),
-	bounded_at timestamp,
+	updated_by uuid not null
+		constraint controlador_users_id_fk_2
+			references "Users",
+	updated_at timestamp default NOW()
+);
+
+create table "Sensor"
+(
+	id serial,
+	controlador_id int
+		constraint sensor_controlador_id_fk
+			references "Controlador" (id),
+	sensor_mac text not null,
+	codigo_vinculacao int not null,
+	created_at timestamp default NOW() not null,
 	bounded_by uuid
 		constraint sensor_users_id_fk
-			references auth.users
-				on delete cascade
+			references "Users",
+	bounded_at timestamp default NOW()
 );
 
-create table "Dados"
+create unique index sensor_codigo_vinculacao_uindex
+	on "Sensor" (codigo_vinculacao);
+
+create unique index sensor_id_uindex
+	on "Sensor" (id);
+
+create unique index sensor_sensor_mac_uindex
+	on "Sensor" (sensor_mac);
+
+alter table "Sensor"
+	add constraint sensor_pk
+		primary key (id);
+
+create table "Dado"
 (
 	id serial
-		constraint dados_pk
+		constraint dado_pk
 			primary key,
 	sensor_id int not null
-		constraint dados_sensor_id_fk
-			references "Sensores",
+		constraint dado_sensor_id_fk
+			references "Sensor",
 	air_temperature float4 not null,
 	air_humidity float4 not null,
 	soil_humidity int not null,
 	readed_at timestamp default NOW() not null
 );
-
--- Creating indexes
-create unique index sensores_sensor_mac_uindex
-	on "Sensores" (sensor_mac);

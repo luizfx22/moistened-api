@@ -1,8 +1,8 @@
-import Grupo from "./Grupo";
+import Controlador from "./Controlador";
 
 type Sensor = {
 	id?: number;
-	grupo_id?: number;
+	controlador_id?: number;
 	sensor_mac: string;
 	codigo_vinculacao: number;
 
@@ -11,7 +11,7 @@ type Sensor = {
 	bounded_at?: Date;
 	bounded_by?: number;
 
-	grupo?: Grupo;
+	controlador?: Controlador;
 };
 
 export default Sensor;
