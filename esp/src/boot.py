@@ -67,11 +67,11 @@ if default_settings["ap-ssid"] != "" and default_settings["ap-password"] != "":
         # Código que consome direto na API
         # --------------------------------
         mac = ubinascii.hexlify(wlan.config('mac'), ':').decode()
-        res = requests.get(DEV_API_ADDR + '/api/sensor/register?mac=' +
+        res = requests.get(DEV_API_ADDR + '/sensor/register?mac=' +
                            mac, headers={"Content-Type": "application/json"}).json()
 
         headers = {"Content-Type": "application/json"}
-        api_path = "/api/sensor/register"
+        api_path = "/sensor/register"
 
         if not res["registered"]:
             payload = {

@@ -26,7 +26,7 @@ while True:
 
     sohum = soil.read()
 
-    nowTime = requests.get(DEV_API_ADDR + "/api/now").text
+    nowTime = requests.get(DEV_API_ADDR + "/now").text
 
     payload = {
         "sensor_id": sets["sensor-id"],
@@ -38,7 +38,7 @@ while True:
 
     print(payload)
 
-    result = requests.post(DEV_API_ADDR + "/api/dados", data=json.dumps(payload),
+    result = requests.post(DEV_API_ADDR + "/dados", data=json.dumps(payload),
                            headers={"Content-Type": "application/json"}).text
 
     print(result)
