@@ -5,8 +5,8 @@ const nextConfig = {
 	rewrites() {
 		return [
 			{
-				source: "/:path",
-				destination: "/api/:path",
+				source: "/",
+				destination: "/api",
 			},
 		];
 	},
