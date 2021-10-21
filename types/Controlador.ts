@@ -1,6 +1,6 @@
 type Controlador = {
-	id: number;
-	horta_id: string;
+	id?: number;
+	horta_id?: string;
 	portas: Array<string>;
 
 	codigo_vinculacao: string;

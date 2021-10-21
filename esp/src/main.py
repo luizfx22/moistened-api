@@ -15,8 +15,8 @@ dht = DHT11(Pin(sets["dht-pin"]))
 soil = ADC(Pin(sets["soil-pin"]))
 soil.atten(ADC.ATTN_11DB)
 
-DEV_API_ADDR = "http://192.168.0.2:3001"
-PROD_API_ADDR = "https://api.moistened.luizg.dev"
+DEV_API_ADDR = "http://192.168.0.2:3001/api"
+PROD_API_ADDR = "https://api.moistened.luizg.dev/api"
 
 while True:
     dht.measure()

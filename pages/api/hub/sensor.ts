@@ -31,7 +31,7 @@ async function registerSensor(sensor: Sensor): Promise<PostgrestResponse<Sensor>
 
 // Validadores
 const SensorValidator = yup.object().shape({
-	grupo_id: yup.number(),
+	horta_id: yup.string().uuid(),
 	sensor_mac: yup
 		.string()
 		.required()

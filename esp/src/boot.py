@@ -9,8 +9,8 @@ import picoweb
 import ubinascii
 import urequests as requests
 
-DEV_API_ADDR = "http://192.168.0.2:3001"
-PROD_API_ADDR = "http://api.moistened.luizg.dev"
+DEV_API_ADDR = "http://192.168.0.2:3001/api"
+PROD_API_ADDR = "http://api.moistened.luizg.dev/api"
 
 
 # Useful fuction
