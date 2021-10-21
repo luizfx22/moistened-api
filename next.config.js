@@ -5,8 +5,8 @@ const nextConfig = {
 	rewrites() {
 		return [
 			{
-				source: "/*",
-				destination: "/api/*",
+				source: "/",
+				destination: "/api",
 			},
 		];
 	},
