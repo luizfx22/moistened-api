@@ -49,7 +49,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				if (result.data.length < 1) return res.status(200).json({ registered: false });
 				return res.status(200).json({ registered: true, id: result.data[0].id });
 			})
-			.catch((e) => res.status(500).json({ ...e }));
+			.catch((e) => res.status(500).json({ registered: false, ...e }));
 	}
 
 	if (req.method !== "POST") return res.status(405).json({ message: "Invalid method!" });
