@@ -1,9 +1,9 @@
 create table "Sensor"
 (
 	id serial,
-	controlador_id int
-		constraint sensor_controlador_id_fk
-			references "Controlador" (id),
+	horta_id uuid not null
+		constraint controlador_horta_id_fk
+			references "Horta",
 	sensor_mac text not null,
 	codigo_vinculacao int not null,
 	created_at timestamp default NOW() not null,

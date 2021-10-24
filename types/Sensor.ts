@@ -2,7 +2,8 @@ import Controlador from "./Controlador";
 
 type Sensor = {
 	id?: number;
-	controlador_id?: number;
+	// controlador_id?: number;
+	horta_id?: string;
 	sensor_mac: string;
 	codigo_vinculacao: number;
 

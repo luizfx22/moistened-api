@@ -8,7 +8,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANO
 async function checkSensor(sensorMac: string): Promise<PostgrestResponse<Sensor>> {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const sensor = await supabase.from<Sensor>("Sensores").select("*").eq("sensor_mac", sensorMac.toUpperCase());
+			const sensor = await supabase.from<Sensor>("Sensor").select("*").eq("sensor_mac", sensorMac.toUpperCase());
 			return resolve(sensor);
 		} catch (e) {
 			return reject(e);
@@ -20,7 +20,7 @@ async function registerSensor(sensor: Sensor): Promise<PostgrestResponse<Sensor>
 	return new Promise(async (resolve, reject) => {
 		try {
 			const newSensor = await supabase
-				.from("Sensores")
+				.from("Sensor")
 				.insert([{ ...sensor, sensor_mac: sensor.sensor_mac.toUpperCase() }]);
 			return resolve(newSensor);
 		} catch (e) {
