@@ -20,7 +20,7 @@ async function registerSensor(sensor: Sensor): Promise<PostgrestResponse<Sensor>
 	return new Promise(async (resolve, reject) => {
 		try {
 			const newSensor = await supabase
-				.from("Sensor")
+				.from<Sensor>("Sensor")
 				.insert([{ ...sensor, sensor_mac: sensor.sensor_mac.toUpperCase() }]);
 			return resolve(newSensor);
 		} catch (e) {
@@ -46,6 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "GET" && req.query?.mac && typeof req.query?.mac === "string") {
 		return checkSensor(req.query?.mac)
 			.then((result) => {
+				console.log(result);
 				if (result.data.length < 1) return res.status(200).json({ registered: false });
 				return res.status(200).json({ registered: true, id: result.data[0].id });
 			})
