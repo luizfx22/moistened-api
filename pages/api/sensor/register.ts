@@ -46,7 +46,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === "GET" && req.query?.mac && typeof req.query?.mac === "string") {
 		return checkSensor(req.query?.mac)
 			.then((result) => {
-				console.log(result);
 				if (result.data.length < 1) return res.status(200).json({ registered: false });
 				return res.status(200).json({ registered: true, id: result.data[0].id });
 			})

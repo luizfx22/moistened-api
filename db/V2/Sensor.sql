@@ -1,7 +1,7 @@
 create table "Sensor"
 (
 	id serial,
-	horta_id uuid not null
+	horta_id uuid
 		constraint controlador_horta_id_fk
 			references "Horta",
 	sensor_mac text not null,

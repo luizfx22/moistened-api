@@ -83,6 +83,8 @@ if default_settings["ap-ssid"] != "" and default_settings["ap-password"] != "":
             registro = requests.post(
                 DEV_API_ADDR + api_path, data=json.dumps(payload), headers=headers).json()
 
+            print(registro)
+
             if registro["success"]:
                 with open("settings.json", "r+", encoding="utf-8") as file:
                     data = json.load(file)
