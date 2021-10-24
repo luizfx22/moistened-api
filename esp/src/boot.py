@@ -10,8 +10,8 @@ import ubinascii
 import urequests as requests
 
 # DEV_API_ADDR = "http://192.168.0.2:3001/api"
-DEV_API_ADDR = "http://api.moistened.luizg.dev/api"
-PROD_API_ADDR = "http://api.moistened.luizg.dev/api"
+DEV_API_ADDR = "https://api.moistened.luizg.dev/api"
+PROD_API_ADDR = "https://api.moistened.luizg.dev/api"
 
 
 # Useful fuction
