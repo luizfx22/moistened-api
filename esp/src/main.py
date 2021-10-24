@@ -37,8 +37,6 @@ while True:
         "readed_at": nowTime
     }
 
-    print(payload)
-
     result = requests.post(DEV_API_ADDR + "/dados", data=json.dumps(payload),
                            headers={"Content-Type": "application/json"}).text
 
